@@ -1,9 +1,9 @@
+import { FontAwesome5, MaterialCommunityIcons, MaterialIcons } from '@expo/vector-icons';
 import { Tabs } from 'expo-router';
-import { MaterialIcons, MaterialCommunityIcons, FontAwesome5 } from '@expo/vector-icons';
-import { Pressable, TouchableOpacity, TouchableWithoutFeedback } from 'react-native';
+import { TouchableWithoutFeedback } from 'react-native';
 
-import type { GestureResponderEvent } from 'react-native';
 import { View } from '@/components/Themed';
+import type { GestureResponderEvent } from 'react-native';
 
 type NoShadowTabBarButtonProps = {
   children: React.ReactNode;

@@ -1,11 +1,11 @@
 {
   "expo": {
-    "name": "bukukas",
-    "slug": "bukukas",
+    "name": "activity-app",
+    "slug": "activity-app",
     "version": "1.0.0",
     "orientation": "portrait",
     "icon": "./assets/images/icon.png",
-    "scheme": "bukukas",
+    "scheme": "activity-app",
     "userInterfaceStyle": "automatic",
     "newArchEnabled": true,
     "splash": {

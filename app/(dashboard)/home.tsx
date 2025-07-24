@@ -2,12 +2,12 @@ import ProfileCard from '@/components/home/ProfileCard';
 import { getUserProfile } from '@/utils/api';
 import React, { useEffect, useState } from 'react';
 import {
-  SafeAreaView,
-  View,
-  StyleSheet,
   Platform,
+  SafeAreaView,
   StatusBar,
+  StyleSheet,
   Text,
+  View,
 } from 'react-native';
 import SkeletonPlaceholder from 'react-native-skeleton-placeholder';
 
