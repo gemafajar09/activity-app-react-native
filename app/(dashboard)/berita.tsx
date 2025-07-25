@@ -1,10 +1,10 @@
 import { StyleSheet, Text, View } from 'react-native';
-
 export default function BeritaScreen() {
   return (
-    <View style={styles.container}>
-      <Text style={styles.title}>Berita Screen</Text>
-      <Text>Latest news and updates appear here.</Text>
+    <View className="flex-1 items-center justify-center bg-white">
+      <Text className="text-xl font-bold text-blue-500">
+        Welcome to Nativewind!
+      </Text>
     </View>
   );
 }

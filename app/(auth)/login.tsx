@@ -1,18 +1,16 @@
-import React, { useContext, useState } from 'react';
-import {
-  View,
-  Text,
-  TextInput,
-  StyleSheet,
-  TouchableOpacity,
-  Image,
-  StatusBar,
-} from 'react-native';
-import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
-import { Link, useRouter } from 'expo-router';
-import AsyncStorage from '@react-native-async-storage/async-storage';
 import { AuthContext } from '@/context/AuthContext';
 import { loginAction } from '@/utils/api';
+import AsyncStorage from '@react-native-async-storage/async-storage';
+import { Link, useRouter } from 'expo-router';
+import React, { useContext, useState } from 'react';
+import {
+  StatusBar,
+  Text,
+  TextInput,
+  TouchableOpacity,
+  View,
+} from 'react-native';
+import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
 
 const LoginScreen = () => {
   const [email, setEmail] = useState('');
@@ -51,36 +49,38 @@ const LoginScreen = () => {
   };
 
   return (
-    <View style={styles.container}>
+    <View className="flex-1 bg-[#1e3c72] px-8 justify-center">
       <StatusBar barStyle="light-content" backgroundColor="#1e3c72" />
-      
-      <View style={styles.header}>
-        <Text style={styles.title}>Welcome Back!</Text>
+
+      <View className="items-center mb-10">
+        <Text className="text-2xl text-white font-bold">Welcome Back!</Text>
       </View>
 
       {errorMsg ? (
-        <Text style={styles.errorText}>{errorMsg}</Text>
+        <Text className="text-red-500 text-center mb-2">{errorMsg}</Text>
       ) : null}
 
-      <View style={styles.inputContainer}>
-        <View style={styles.inputBox}>
-          <Icon name="email-outline" size={22} color="#fff" style={styles.icon} />
+      <View className="mb-5">
+        {/* Email Input */}
+        <View className="flex-row items-center border-b border-gray-500 mb-5 pb-1">
+          <Icon name="email-outline" size={22} color="#fff" className="mr-2" />
           <TextInput
             placeholder="Email"
             placeholderTextColor="#aaa"
-            style={styles.input}
+            className="flex-1 text-white"
             keyboardType="email-address"
             value={email}
             onChangeText={setEmail}
           />
         </View>
 
-        <View style={styles.inputBox}>
-          <Icon name="lock-outline" size={22} color="#fff" style={styles.icon} />
+        {/* Password Input */}
+        <View className="flex-row items-center border-b border-gray-500 mb-5 pb-1">
+          <Icon name="lock-outline" size={22} color="#fff" className="mr-2" />
           <TextInput
             placeholder="Password"
             placeholderTextColor="#aaa"
-            style={styles.input}
+            className="flex-1 text-white"
             secureTextEntry
             value={password}
             onChangeText={setPassword}
@@ -89,91 +89,27 @@ const LoginScreen = () => {
       </View>
 
       <TouchableOpacity>
-        <Text style={styles.forgotText}>Forgot Password?</Text>
+        <Text className="text-gray-400 self-end mb-8">Forgot Password?</Text>
       </TouchableOpacity>
 
       <TouchableOpacity
         onPress={handleLogin}
-        style={[styles.loginButton, loading && { opacity: 0.7 }]}
+        className={`bg-[#36d1dc] py-3 rounded-full items-center mb-10 ${loading ? 'opacity-70' : ''}`}
         disabled={loading}
       >
-        <Text style={styles.loginText}>{loading ? 'Loading...' : 'Login'}</Text>
+        <Text className="text-white text-base font-semibold">
+          {loading ? 'Loading...' : 'Login'}
+        </Text>
       </TouchableOpacity>
 
-      <Text style={styles.signUpText}>
+      <Text className="text-center text-gray-300">
         Don't have an account?{' '}
-        <Link href="/(auth)/register" style={styles.signUpLink}>
+        <Link href="/(auth)/register" className="text-[#36d1dc] font-bold">
           Sign Up
         </Link>
       </Text>
     </View>
   );
 };
-
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: '#1e3c72',
-    paddingHorizontal: 30,
-    justifyContent: 'center',
-  },
-  header: {
-    alignItems: 'center',
-    marginBottom: 40,
-  },
-  title: {
-    fontSize: 26,
-    color: '#fff',
-    fontWeight: 'bold',
-  },
-  errorText: {
-    color: 'red',
-    textAlign: 'center',
-    marginBottom: 10,
-  },
-  inputContainer: {
-    marginBottom: 20,
-  },
-  inputBox: {
-    flexDirection: 'row',
-    alignItems: 'center',
-    borderBottomColor: '#888',
-    borderBottomWidth: 1,
-    marginBottom: 20,
-    paddingBottom: 5,
-  },
-  icon: {
-    marginRight: 10,
-  },
-  input: {
-    flex: 1,
-    color: '#fff',
-  },
-  forgotText: {
-    color: '#aaa',
-    alignSelf: 'flex-end',
-    marginBottom: 30,
-  },
-  loginButton: {
-    backgroundColor: '#36d1dc',
-    paddingVertical: 12,
-    borderRadius: 25,
-    alignItems: 'center',
-    marginBottom: 40,
-  },
-  loginText: {
-    color: '#fff',
-    fontSize: 16,
-    fontWeight: '600',
-  },
-  signUpText: {
-    color: '#ccc',
-    textAlign: 'center',
-  },
-  signUpLink: {
-    color: '#36d1dc',
-    fontWeight: 'bold',
-  },
-});
 
 export default LoginScreen;

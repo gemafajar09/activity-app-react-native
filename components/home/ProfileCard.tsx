@@ -1,12 +1,6 @@
 import { MaterialIcons } from '@expo/vector-icons';
 import React from 'react';
-import {
-  Image,
-  StyleSheet,
-  Text,
-  TouchableOpacity,
-  View,
-} from 'react-native';
+import { Image, Text, TouchableOpacity, View } from 'react-native';
 import { Provider } from 'react-native-paper';
 
 type ProfileCardProps = {
@@ -16,69 +10,26 @@ type ProfileCardProps = {
 };
 
 export default function ProfileCard({ name, email, avatarUrl }: ProfileCardProps) {
-
   return (
     <Provider>
-      <View style={styles.card}>
+      <View className="flex-row items-center bg-white p-4 mx-4 mt-4 rounded-xl shadow-md relative z-50">
         <Image
           source={
             avatarUrl
               ? { uri: avatarUrl }
               : require('../../assets/profile/user.png')
           }
-          style={styles.avatar}
+          className="w-16 h-16 rounded-full mr-4"
         />
-        <View style={styles.info}>
-          <Text style={styles.name}>{name}</Text>
-          <Text style={styles.email}>{email}</Text>
+        <View className="flex-1">
+          <Text className="text-lg font-semibold text-gray-800">{name}</Text>
+          <Text className="text-sm text-gray-500 mt-1">{email}</Text>
         </View>
 
-        <TouchableOpacity style={styles.leftIcon}>
+        <TouchableOpacity className="mr-3">
           <MaterialIcons name="notifications" size={32} color="#e5b32bff" />
         </TouchableOpacity>
-        
       </View>
     </Provider>
   );
 }
-
-const styles = StyleSheet.create({
-  card: {
-    flexDirection: 'row',
-    backgroundColor: '#fff',
-    padding: 16,
-    marginHorizontal: 16,
-    marginTop: 16,
-    borderRadius: 12,
-    elevation: 3,
-    shadowColor: '#000',
-    shadowOpacity: 0.1,
-    shadowRadius: 6,
-    shadowOffset: { width: 0, height: 3 },
-    alignItems: 'center',
-    position: 'relative',
-    zIndex: 50,
-  },
-  leftIcon: {
-    marginRight: 12,
-  },
-  avatar: {
-    width: 64,
-    height: 64,
-    borderRadius: 32,
-    marginRight: 16,
-  },
-  info: {
-    flex: 1,
-  },
-  name: {
-    fontSize: 18,
-    fontWeight: '600',
-    color: '#333',
-  },
-  email: {
-    fontSize: 14,
-    color: '#777',
-    marginTop: 4,
-  },
-});

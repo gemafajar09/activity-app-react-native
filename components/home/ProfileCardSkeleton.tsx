@@ -1,66 +1,36 @@
-import React from 'react';
-import { Animated, StyleSheet, View } from 'react-native';
+import React, { useEffect, useRef } from 'react';
+import { Animated, View } from 'react-native';
 
 export default function ProfileCardSkeleton() {
-  const pulseAnim = new Animated.Value(0.3);
+  const pulseAnim = useRef(new Animated.Value(0.3)).current;
 
-  Animated.loop(
-    Animated.sequence([
-      Animated.timing(pulseAnim, {
-        toValue: 1,
-        duration: 800,
-        useNativeDriver: true,
-      }),
-      Animated.timing(pulseAnim, {
-        toValue: 0.3,
-        duration: 800,
-        useNativeDriver: true,
-      }),
-    ])
-  ).start();
+  useEffect(() => {
+    Animated.loop(
+      Animated.sequence([
+        Animated.timing(pulseAnim, {
+          toValue: 1,
+          duration: 800,
+          useNativeDriver: true,
+        }),
+        Animated.timing(pulseAnim, {
+          toValue: 0.3,
+          duration: 800,
+          useNativeDriver: true,
+        }),
+      ])
+    ).start();
+  }, [pulseAnim]);
 
   return (
-    <Animated.View style={[styles.card, { opacity: pulseAnim }]}>
-      <View style={styles.avatar} />
-      <View style={styles.info}>
-        <View style={styles.lineShort} />
-        <View style={styles.lineLong} />
+    <Animated.View
+      style={{ opacity: pulseAnim }}
+      className="flex-row items-center bg-gray-200 rounded-xl p-4 mx-4 mt-4"
+    >
+      <View className="w-16 h-16 rounded-full bg-gray-400" />
+      <View className="flex-1 ml-4">
+        <View className="w-30 h-4 rounded-md bg-gray-300 mb-2" />
+        <View className="w-44 h-4 rounded-md bg-gray-300" />
       </View>
     </Animated.View>
   );
 }
-
-const styles = StyleSheet.create({
-  card: {
-    flexDirection: 'row',
-    backgroundColor: '#eee',
-    padding: 16,
-    marginHorizontal: 16,
-    marginTop: 16,
-    borderRadius: 12,
-    alignItems: 'center',
-  },
-  avatar: {
-    width: 64,
-    height: 64,
-    borderRadius: 32,
-    backgroundColor: '#ccc',
-  },
-  info: {
-    marginLeft: 16,
-    flex: 1,
-  },
-  lineShort: {
-    width: 120,
-    height: 16,
-    backgroundColor: '#ddd',
-    borderRadius: 8,
-    marginBottom: 8,
-  },
-  lineLong: {
-    width: 180,
-    height: 16,
-    backgroundColor: '#ddd',
-    borderRadius: 8,
-  },
-});

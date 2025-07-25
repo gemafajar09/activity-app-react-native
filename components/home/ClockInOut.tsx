@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { StyleSheet, Text, TouchableOpacity, View } from 'react-native';
+import { Text, TouchableOpacity, View } from 'react-native';
 import Ionicons from 'react-native-vector-icons/Ionicons';
 
 const ClockInOut: React.FC = () => {
@@ -21,85 +21,41 @@ const ClockInOut: React.FC = () => {
   };
 
   return (
-    <View style={styles.container}>
-        <View style={styles.containerContent}>
-            <Text style={styles.header}>Absensi</Text>
+    <View className="p-5">
+      <View className="bg-white p-5 rounded-xl shadow-md">
+        <Text className="text-2xl font-bold text-center text-gray-800 mb-8">
+          Absensi
+        </Text>
 
-            <View style={styles.buttonRow}>
-                {/* Clock In Button */}
-                <TouchableOpacity style={[styles.button, styles.clockIn]} onPress={handleClockIn}>
-                <Ionicons name="log-in-outline" size={24} color="#fff" />
-                <Text style={styles.buttonText}>Clock In</Text>
-                </TouchableOpacity>
+        <View className="flex-row justify-between">
+          {/* Clock In Button */}
+          <TouchableOpacity
+            className="flex-1 flex-row items-center justify-center bg-green-600 py-3 px-5 rounded-lg shadow-md mr-3"
+            onPress={handleClockIn}
+          >
+            <Ionicons name="log-in-outline" size={24} color="#fff" />
+            <Text className="text-white text-lg font-semibold ml-2">
+              Clock In
+            </Text>
+          </TouchableOpacity>
 
-                {/* Clock Out Button */}
-                <TouchableOpacity
-                style={[styles.button, styles.clockOut, !clockInTime && styles.disabled]}
-                onPress={handleClockOut}
-                disabled={!clockInTime}
-                >
-                <Ionicons name="log-out-outline" size={24} color="#fff" />
-                <Text style={styles.buttonText}>Clock Out</Text>
-                </TouchableOpacity>
-            </View>
+          {/* Clock Out Button */}
+          <TouchableOpacity
+            className={`flex-1 flex-row items-center justify-center py-3 px-5 rounded-lg shadow-md ml-3 ${
+              clockInTime ? 'bg-red-600' : 'bg-gray-300'
+            }`}
+            onPress={handleClockOut}
+            disabled={!clockInTime}
+          >
+            <Ionicons name="log-out-outline" size={24} color="#fff" />
+            <Text className="text-white text-lg font-semibold ml-2">
+              Clock Out
+            </Text>
+          </TouchableOpacity>
         </View>
+      </View>
     </View>
   );
 };
-
-const styles = StyleSheet.create({
-  container: {
-    padding: 20,
-  },
-  containerContent: {
-    backgroundColor: '#fff',
-    padding: 20,
-    borderRadius: 10,
-  },
-  header: {
-    fontSize: 28,
-    fontWeight: 'bold',
-    marginBottom: 30,
-    textAlign: 'center',
-    color: '#333',
-  },
-  buttonRow: {
-    flexDirection: 'row',
-    justifyContent: 'space-between',
-  },
-  button: {
-    flexDirection: 'row',
-    alignItems: 'center',
-    paddingVertical: 14,
-    paddingHorizontal: 22,
-    borderRadius: 10,
-    elevation: 3,
-    shadowColor: '#000',
-    shadowOpacity: 0.2,
-    shadowRadius: 4,
-    shadowOffset: { width: 0, height: 2 },
-  },
-  clockIn: {
-    backgroundColor: '#4CAF50', // hijau
-    marginRight: 12,
-    flex: 1,
-    justifyContent: 'center',
-  },
-  clockOut: {
-    backgroundColor: '#F44336', // merah
-    marginLeft: 12,
-    flex: 1,
-    justifyContent: 'center',
-  },
-  disabled: {
-    backgroundColor: '#ccc',
-  },
-  buttonText: {
-    color: '#fff',
-    fontSize: 18,
-    marginLeft: 10,
-    fontWeight: '600',
-  },
-});
 
 export default ClockInOut;
