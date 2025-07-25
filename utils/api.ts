@@ -1,7 +1,7 @@
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import axios from 'axios';
 
-const BASE_URL = 'http://192.168.100.137:3000/api';
+const BASE_URL = 'http://192.168.100.13:3000/api';
 
 const api = axios.create({
   baseURL: BASE_URL,
@@ -10,7 +10,6 @@ const api = axios.create({
   },
 });
 
-// Tambahkan token otomatis ke semua request
 api.interceptors.request.use(async (config) => {
   const token = await AsyncStorage.getItem('userToken');
   if (token) {
@@ -19,14 +18,12 @@ api.interceptors.request.use(async (config) => {
   return config;
 });
 
-// Fungsi login
 export const loginAction = async (email: string, password: string) => {
   try {
     const response = await api.post('/login', { email, password });
     
-    // Validasi respons dari server
     if (response.data.success) {
-      return response.data.data; // berisi token + user info
+      return response.data.data;
     } else {
       throw new Error(response.data.message || 'Login gagal');
     }

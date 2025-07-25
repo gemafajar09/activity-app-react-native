@@ -1,15 +1,13 @@
-import React, { useContext, useState } from 'react';
+import { MaterialIcons } from '@expo/vector-icons';
+import React from 'react';
 import {
-  View,
-  Text,
-  StyleSheet,
   Image,
+  StyleSheet,
+  Text,
   TouchableOpacity,
+  View,
 } from 'react-native';
-import { MaterialIcons, Feather } from '@expo/vector-icons';
-import { Menu, Provider } from 'react-native-paper';
-import { AuthContext } from '@/context/AuthContext';
-import { router } from 'expo-router';
+import { Provider } from 'react-native-paper';
 
 type ProfileCardProps = {
   name: string;
@@ -18,29 +16,10 @@ type ProfileCardProps = {
 };
 
 export default function ProfileCard({ name, email, avatarUrl }: ProfileCardProps) {
-  const [menuVisible, setMenuVisible] = useState(false);
-  
-  const { logout } = useContext(AuthContext);
-  
-  const openMenu = () => setMenuVisible(true);
-  const closeMenu = () => setMenuVisible(false);
-
-  const handleSetting = () => {
-    closeMenu();
-    console.log('Navigasi ke Setting');
-  };
-
-  const handleLogout = async () => {
-    closeMenu();
-    await logout();
-    router.replace('/(auth)/login');
-  };
-
 
   return (
     <Provider>
       <View style={styles.card}>
-        
         <Image
           source={
             avatarUrl
@@ -55,21 +34,9 @@ export default function ProfileCard({ name, email, avatarUrl }: ProfileCardProps
         </View>
 
         <TouchableOpacity style={styles.leftIcon}>
-          <MaterialIcons name="notifications" size={28} color="#e5b32bff" />
+          <MaterialIcons name="notifications" size={32} color="#e5b32bff" />
         </TouchableOpacity>
-
-        <Menu
-          visible={menuVisible}
-          onDismiss={closeMenu}
-          anchor={
-            <TouchableOpacity onPress={openMenu}>
-              <Feather name="more-vertical" size={22} color="#555" />
-            </TouchableOpacity>
-          }
-        >
-          <Menu.Item onPress={handleSetting} title="Setting" />
-          <Menu.Item onPress={handleLogout} title="Logout" />
-        </Menu>
+        
       </View>
     </Provider>
   );
@@ -90,6 +57,7 @@ const styles = StyleSheet.create({
     shadowOffset: { width: 0, height: 3 },
     alignItems: 'center',
     position: 'relative',
+    zIndex: 50,
   },
   leftIcon: {
     marginRight: 12,

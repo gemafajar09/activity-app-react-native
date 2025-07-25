@@ -1,5 +1,5 @@
 {
-  "name": "axtivity-app",
+  "name": "activity-app",
   "main": "expo-router/entry",
   "license": "0BSD",
   "version": "1.0.0",
@@ -33,7 +33,6 @@
     "react-native-paper": "^5.14.5",
     "react-native-reanimated": "~3.17.4",
     "react-native-screens": "~4.11.1",
-    "react-native-skeleton-placeholder": "^5.2.4",
     "react-native-web": "~0.20.0"
   },
   "devDependencies": {

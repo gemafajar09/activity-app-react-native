@@ -113,7 +113,7 @@ const LoginScreen = () => {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: '#1e3c72', // ganti LinearGradient dengan warna solid
+    backgroundColor: '#1e3c72',
     paddingHorizontal: 30,
     justifyContent: 'center',
   },
